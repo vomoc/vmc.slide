@@ -15,8 +15,7 @@
 </head>
 
 <body>
-   
-    <div id="slider" >
+    <div id="slider">
         <a href="javascript:;"><img src="demo1.jpg" /></a>
         <a href="javascript:;"><img src="demo2.jpg" /></a>
         <a href="javascript:;"><img src="demo3.jpg" /></a>
@@ -24,7 +23,17 @@
         <a href="javascript:;"><img src="demo5.jpg" /></a>
         <a href="javascript:;"><img src="demo6.jpg" /></a>
     </div>
-
+    <div class="">
+        <section>
+            <h3>过场效果</h3>
+            <p>
+                <div class="item">
+                    <input type="checkbox" name="effects" id="effects-fade" value="fade">
+                    <label for="effects-fade">淡入淡出[默认]</label>
+                </div>
+            </p>
+        </section>
+    </div>
     <script type="text/javascript">
     $(function() {
         var options = {
@@ -36,37 +45,37 @@
             gridHorizontal: 10, // 栅格行数
             autoPlay: false, // 自动播放
             ascending: true, // 图片按照升序播放
-           /* effects: [ // 使用的转场动画效果
-                'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
-                'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
-                'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
-            ],*/
+            /* effects: [ // 使用的转场动画效果
+                 'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
+                 'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
+                 'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
+             ],*/
             ie6Tidy: false, // IE6下精简效果
             random: false, // 随机使用转场动画效果
             duration: 4000, // 图片停留时长（毫秒）
             speed: 900, // 转场效果时长（毫秒）
-            flip:function(){
-               // console.log(this);
+            flip: function() {
+                // console.log(this);
             },
-            create:function(){
-              //  console.log('ok');
+            create: function() {
+                //  console.log('ok');
             }
         };
         /* 创建轮播效果 */
         $('#slider').vmcSlider(options);
-        $('#slider').on('vmcsliderflip', function(e,ui){
-          //      console.log(e);
+        $('#slider').on('vmcsliderflip', function(e, ui) {
+            //      console.log(e);
             //    console.log(ui);
-          //  console.log('custome');
+            //  console.log('custome');
         });
         $('#slider').vmcSlider('option', 'effects', [ // 使用的转场动画效果
-                'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
-                'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
-                'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
-            ]);
+            'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
+            'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
+            'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
+        ]);
 
         //$('#slider').vmcSlider('option', 'height', 800);
-        $('#slider').vmcSlider('option', 'autoPlay', true);
+        //$('#slider').vmcSlider('option', 'autoPlay', true);
 
     });
     </script>

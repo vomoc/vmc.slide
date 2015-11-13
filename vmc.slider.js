@@ -142,11 +142,10 @@
         }
     };
     //**************************************************************************************************************
-    // 创建
+    // 创建dom
     vmcSlider.prototype._create = function() {
         var the = this,
-            node = the.node,
-            opts = the.options;
+            node = the.node;
         node.mimic = $('<div class="vui-slider"></div>');
         node.items = $('<div class="vui-items"></div>').appendTo(node.mimic);
         node.buttons = $('<div class="vui-buttons"></div>').appendTo(node.mimic);
@@ -159,14 +158,12 @@
         });
         node.item = node.items.children();
         node.button = node.buttons.children();
-        // node.elem.replaceWith(node.mimic);
         node.elem.html(node.mimic);
     };
     //**************************************************************************************************************
     // 创建舞台
     vmcSlider.prototype._buildStage = function() {
         var the = this,
-            node = the.node,
             opts = the.options,
             gridWidth, gridHeight;
         the.stageHtml = ['', '', ''];
@@ -227,7 +224,7 @@
                 }
             }
         });
-        // 绑定事件
+        // 自定义事件
         node.elem.on('vmcsliderflip', function() {
             opts.flip.call(the);
         });
@@ -241,13 +238,17 @@
         var the = this,
             node = the.node,
             opts = the.options;
+        // 圆点按钮样式
         node.button.eq(the.index).addClass('vui-button-cur').siblings().removeClass('vui-button-cur');
+        // 触发翻页事件
         node.elem.trigger('vmcsliderflip', the);
+        // 翻页
         if (opts.effects.length) {
             the.animateStatus = true;
             node.transfer.children().stop(true);
             effects[the._getEffect()].call(the);
         } else {
+            // 无过场效果
             the._afterTransfer();
         }
     };
