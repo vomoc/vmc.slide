@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+    <title>Demo - vmcSlider 图片轮播插件 - 维米客网页工作室 Vomoc Web Studio</title>
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <script type="text/javascript" src="../lib/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../vmc.slider.js"></script>
+    <script type="text/javascript" src="../vmc.slider.effects.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/style.css" />
+</head>
+
+<body>
+   
+    <div id="slider" >
+        <a href="javascript:;"><img src="demo1.jpg" /></a>
+        <a href="javascript:;"><img src="demo2.jpg" /></a>
+        <a href="javascript:;"><img src="demo3.jpg" /></a>
+        <a href="javascript:;"><img src="demo4.jpg" /></a>
+        <a href="javascript:;"><img src="demo5.jpg" /></a>
+        <a href="javascript:;"><img src="demo6.jpg" /></a>
+    </div>
+
+    <script type="text/javascript">
+    $(function() {
+        var options = {
+            width: 1000, // 宽度
+            height: 330, // 高度
+            gridCol: 10, // 网格列数
+            gridRow: 5, // 网格行数
+            gridVertical: 20, // 栅格列数
+            gridHorizontal: 10, // 栅格行数
+            autoPlay: false, // 自动播放
+            ascending: true, // 图片按照升序播放
+           /* effects: [ // 使用的转场动画效果
+                'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
+                'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
+                'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
+            ],*/
+            ie6Tidy: false, // IE6下精简效果
+            random: false, // 随机使用转场动画效果
+            duration: 4000, // 图片停留时长（毫秒）
+            speed: 900, // 转场效果时长（毫秒）
+            flip:function(){
+               // console.log(this);
+            },
+            create:function(){
+              //  console.log('ok');
+            }
+        };
+        /* 创建轮播效果 */
+        $('#slider').vmcSlider(options);
+        $('#slider').on('vmcsliderflip', function(e,ui){
+          //      console.log(e);
+            //    console.log(ui);
+          //  console.log('custome');
+        });
+        $('#slider').vmcSlider('option', 'effects', [ // 使用的转场动画效果
+                'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
+                'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
+                'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
+            ]);
+
+        //$('#slider').vmcSlider('option', 'height', 800);
+        $('#slider').vmcSlider('option', 'autoPlay', true);
+
+    });
+    </script>
+</body>
+
+</html>
