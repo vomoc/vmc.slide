@@ -225,11 +225,11 @@
             }
         });
         // 自定义事件
-        node.elem.on('vmcsliderflip', function() {
-            opts.flip.call(the);
+        node.elem.on('vmcsliderflip', function(e) {
+            opts.flip.call(the, e, the);
         });
-        node.elem.on('vmcslidercreate', function() {
-            opts.create.call(the);
+        node.elem.on('vmcslidercreate', function(e) {
+            opts.create.call(the, e, the);
         });
     };
     //**************************************************************************************************************

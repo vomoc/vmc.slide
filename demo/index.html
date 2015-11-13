@@ -54,8 +54,8 @@
             random: false, // 随机使用转场动画效果
             duration: 4000, // 图片停留时长（毫秒）
             speed: 900, // 转场效果时长（毫秒）
-            flip: function() {
-                // console.log(this);
+            flip: function(e,ui) {
+               console.log(ui);
             },
             create: function() {
                 //  console.log('ok');
