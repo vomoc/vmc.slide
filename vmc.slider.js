@@ -226,10 +226,10 @@
         });
         // 自定义事件
         node.elem.on('vmcsliderflip', function(e) {
-            opts.flip.call(the, e, the);
+            opts.flip.call(node.elem[0], e, the);
         });
         node.elem.on('vmcslidercreate', function(e) {
-            opts.create.call(the, e, the);
+            opts.create.call(node.elem[0], e, the);
         });
     };
     //**************************************************************************************************************

@@ -55,7 +55,8 @@
             duration: 4000, // 图片停留时长（毫秒）
             speed: 900, // 转场效果时长（毫秒）
             flip: function(e,ui) {
-               console.log(ui);
+               // console.log(ui);
+               // console.log(this);
             },
             create: function() {
                 //  console.log('ok');
@@ -64,6 +65,7 @@
         /* 创建轮播效果 */
         $('#slider').vmcSlider(options);
         $('#slider').on('vmcsliderflip', function(e, ui) {
+           // console.log(this);
             //      console.log(e);
             //    console.log(ui);
             //  console.log('custome');
