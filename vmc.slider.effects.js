@@ -11,10 +11,10 @@
     $.vmcSliderEffects({
         'fadeTopLeft': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(0);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var x = i % opts.gridCol;
@@ -30,10 +30,10 @@
         },
         'fadeBottomRight': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(0);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var x = i % opts.gridCol;
@@ -49,10 +49,10 @@
         },
         'fadeLeft': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var delay = opts.speed / 3 * 2 / opts.gridVertical * (i + 1);
@@ -65,10 +65,10 @@
         },
         'fadeRight': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var delay = opts.speed / 3 * 2 / opts.gridVertical * (opts.gridVertical - i);
@@ -81,10 +81,10 @@
         },
         'fadeTop': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(1);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var delay = opts.speed / 3 * 2 / opts.gridHorizontal * (i + 1);
@@ -97,10 +97,10 @@
         },
         'fadeBottom': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(1);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var delay = opts.speed / 3 * 2 / opts.gridHorizontal * (opts.gridHorizontal - i);
@@ -113,10 +113,10 @@
         },
         'blindsTopLeft': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(0);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 width: 0,
                 height: 0,
                 opacity: 0
@@ -136,10 +136,10 @@
         },
         'blindsBottomRight': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(0);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 width: 0,
                 height: 0,
                 opacity: 0
@@ -159,10 +159,10 @@
         },
         'blindsLeft': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 width: 0,
                 opacity: 0
             }).each(function(i) {
@@ -177,10 +177,10 @@
         },
         'blindsRight': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 width: 0,
                 opacity: 0
             }).each(function(i) {
@@ -195,10 +195,10 @@
         },
         'blindsTop': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(1);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 height: 0,
                 opacity: 0
             }).each(function(i) {
@@ -213,10 +213,10 @@
         },
         'blindsBottom': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(1);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 height: 0,
                 opacity: 0
             }).each(function(i) {
@@ -231,12 +231,12 @@
         },
         'mosaic': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             var max = 0;
             var index = 0;
             the._setStage(0);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var delay = opts.speed / 2 * Math.random();
@@ -253,14 +253,14 @@
         },
         'bomb': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             var max = 0;
             var index = 0;
             var gridWidth = opts.width / opts.gridCol;
             var gridHeight = opts.height / opts.gridRow;
             the._setStage(0);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 top: (opts.height - gridHeight) / 2,
                 left: (opts.width - gridWidth) / 2,
                 opacity: 0
@@ -285,15 +285,15 @@
         },
         'fumes': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(0);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 width: opts.width / opts.gridCol * 2,
                 height: opts.height / opts.gridRow * 2,
                 opacity: 0
             }).each(function(i) {
-                var delay = opts.speed / 3 * 2 / node.transfer.children().length * (i + 1);
+                var delay = opts.speed / 3 * 2 / elem.find('.vui-transfer').children().length * (i + 1);
                 $(this).delay(delay).animate({
                     width: opts.width / opts.gridCol,
                     height: opts.height / opts.gridRow,
@@ -305,10 +305,10 @@
         },
         'interlaceLeft': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var delay = opts.speed / 3 * 2 / opts.gridVertical * (i + 1);
@@ -324,10 +324,10 @@
         },
         'interlaceRight': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 opacity: 0
             }).each(function(i) {
                 var delay = opts.speed / 3 * 2 / opts.gridVertical * (opts.gridVertical - i);
@@ -343,10 +343,10 @@
         },
         'curtainLeft': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 height: 0,
                 opacity: 0
             }).each(function(i) {
@@ -362,10 +362,10 @@
         },
         'curtainRight': function() {
             var the = this,
-                node = the.node,
+                elem = the.elem,
                 opts = the.options;
             the._setStage(2);
-            node.transfer.children().css({
+            elem.find('.vui-transfer').children().css({
                 height: 0,
                 opacity: 0
             }).each(function(i) {
