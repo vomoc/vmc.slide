@@ -75,8 +75,11 @@
 
 ##### option(optionName, value)
 * 设置选项值
-> 
-// 设置随机使用转场动画效果
-$('#slider').vmcSlider('option', 'random', true);
-// 设置使用指定三种转场效果
-$('#slider').vmcSlider('option', 'effects', ['fadeTop', 'mosaic', 'bomb']);
+
+### 事件
+
+##### vmcsliderflip(event, vmcslider)
+* 切换图片时触发该事件
+
+##### vmcslidercreate(event, vmcslider)
+* vmcSlider 被创建时触发该事件
