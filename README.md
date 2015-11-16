@@ -75,9 +75,8 @@
 
 ##### option(optionName, value)
 * 设置选项值
-`
+> 
 // 设置随机使用转场动画效果
 $('#slider').vmcSlider('option', 'random', true);
 // 设置使用指定三种转场效果
 $('#slider').vmcSlider('option', 'effects', ['fadeTop', 'mosaic', 'bomb']);
-`
