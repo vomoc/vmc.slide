@@ -1,5 +1,7 @@
 # vmcSlider 图片轮播插件
 
+* 详细说明 <http://www.vomoc.com/vmc/slider>
+
 ### 特点
 
 1. 支持左右箭头和圆点按钮播放控制。
