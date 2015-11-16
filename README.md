@@ -1,4 +1,4 @@
-# VMCSlider 图片轮播插件
+# vmcSlider 图片轮播插件
 
 ### 特点
 
@@ -62,3 +62,22 @@
 ##### speed
 * 类型：int，默认值：900，单位：毫秒
 * 转场效果时长。
+
+##### flip
+* 类型：function
+* 翻页时触发事件。
+
+##### speed
+* 类型：function
+* 创建完成触发事件。
+
+### 方法
+
+##### option(optionName, value)
+* 设置选项值
+`
+// 设置随机使用转场动画效果
+$('#slider').vmcSlider('option', 'random', true);
+// 设置使用指定三种转场效果
+$('#slider').vmcSlider('option', 'effects', ['fadeTop', 'mosaic', 'bomb']);
+`
