@@ -24,60 +24,142 @@
         <a href="javascript:;"><img src="demo6.jpg" /></a>
     </div>
     <div class="">
-        <section>
-            <h3>过场效果</h3>
-            <p>
-                <div class="item">
-                    <input type="checkbox" name="effects" id="effects-fade" value="fade">
-                    <label for="effects-fade">淡入淡出[默认]</label>
-                </div>
-            </p>
-        </section>
+        <input type="checkbox" name="random" value="1" id="random">
+        <label for="random">启用随机效果</label>
+        <h3>过场效果</h3>
+        <ul id="effects">
+            <li>
+                <input type="checkbox" name="effects" id="effects-fade" value="fade">
+                <label for="effects-fade">淡入淡出[fade]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-fadeLeft" value="fadeLeft">
+                <label for="effects-fadeLeft">左侧栅格淡入[fadeLeft]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-fadeRight" value="fadeRight">
+                <label for="effects-fadeRight">右侧栅格淡入[fadeRight]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-fadeTop" value="fadeTop">
+                <label for="effects-fadeTop">顶部栅格淡入[fadeTop]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-fadeBottom" value="fadeBottom">
+                <label for="effects-fadeBottom">底部栅格淡入[fadeBottom]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-fadeTopLeft" value="fadeTopLeft">
+                <label for="effects-fadeTopLeft">左上45度栅格淡入[fadeTopLeft]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-fadeBottomRight" value="fadeBottomRight">
+                <label for="effects-fadeBottomRight">右下45度栅格淡入[fadeBottomRight]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-blindsLeft" value="blindsLeft">
+                <label for="effects-blindsLeft">左侧百叶窗[blindsLeft]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-blindsRight" value="blindsRight">
+                <label for="effects-blindsRight">右侧百叶窗[blindsRight]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-blindsTop" value="blindsTop">
+                <label for="effects-blindsTop">顶部百叶窗[blindsTop]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-blindsBottom" value="blindsBottom">
+                <label for="effects-blindsBottom">底部百叶窗[blindsBottom]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-blindsTopLeft" value="blindsTopLeft">
+                <label for="effects-blindsTopLeft">左上百叶窗[blindsTopLeft]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-blindsBottomRight" value="blindsBottomRight">
+                <label for="effects-blindsBottomRight">右下百叶窗[blindsBottomRight]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-curtainLeft" value="curtainLeft">
+                <label for="effects-curtainLeft">左侧幕布[curtainLeft]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-curtainRight" value="curtainRight">
+                <label for="effects-curtainRight">右侧幕布[curtainRight]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-interlaceLeft" value="interlaceLeft">
+                <label for="effects-interlaceLeft">左侧交叉[interlaceLeft]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-interlaceRight" value="interlaceRight">
+                <label for="effects-interlaceRight">右侧交叉[interlaceRight]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-mosaic" value="mosaic">
+                <label for="effects-mosaic">马赛克[mosaic]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-bomb" value="bomb">
+                <label for="effects-bomb">爆炸[bomb]</label>
+            </li>
+            <li>
+                <input type="checkbox" name="effects" id="effects-fumes" value="fumes">
+                <label for="effects-fumes">烟幕[fumes]</label>
+            </li>
+        </ul>
     </div>
     <script type="text/javascript">
     $(function() {
-        var options = {
+        /* 创建轮播效果 */
+        $('#slider').vmcSlider({
             width: 1000, // 宽度
             height: 330, // 高度
             gridCol: 10, // 网格列数
             gridRow: 5, // 网格行数
             gridVertical: 20, // 栅格列数
             gridHorizontal: 10, // 栅格行数
-            autoPlay: false, // 自动播放
+            autoPlay: true, // 自动播放
             ascending: true, // 图片按照升序播放
-            /* effects: [ // 使用的转场动画效果
-                 'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
-                 'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
-                 'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
-             ],*/
+            effects: [], // 使用的转场动画效果
             ie6Tidy: false, // IE6下精简效果
             random: false, // 随机使用转场动画效果
-            duration: 4000, // 图片停留时长（毫秒）
+            duration: 1000, // 图片停留时长（毫秒）
             speed: 900, // 转场效果时长（毫秒）
-            flip: function(e,ui) {
-               // console.log(ui);
-               // console.log(this);
-            },
-            create: function() {
-                //  console.log('ok');
-            }
-        };
-        /* 创建轮播效果 */
-        $('#slider').vmcSlider(options);
-        $('#slider').on('vmcsliderflip', function(e, ui) {
-           // console.log(this);
-            //      console.log(e);
-            //    console.log(ui);
-            //  console.log('custome');
+            flip: function(e, ui) {},
+            create: function() {}
         });
-        /*$('#slider').vmcSlider('option', 'effects', [ // 使用的转场动画效果
+
+        $('#effects').on('click', 'input[name="effects"]', function() {
+            var effects = new Array;
+            $('input[name="effects"]:checked').each(function() {
+                effects.push($(this).val());
+            });
+            $('#slider').vmcSlider('option', 'effects', effects);
+        });
+
+        $('input[name="random"]').on('click', function() {
+            $('#slider').vmcSlider('option', 'random', $(this).prop('checked'));
+        });
+
+        /* 翻页事件 */
+        $('#slider').on('vmcsliderflip', function(e, ui) {
+            var name = ui.options.effects[ui.effectIndex];
+            // console.log(ui.effectIndex);
+            // console.log('#effects-' + name);
+            $('#effects-' + name).closest('li').css('color', '#c00').siblings('li').css('color', '#000');
+            // console.log(this);
+        });
+        /*
+        $('#slider').vmcSlider('option', 'effects', [ // 使用的转场动画效果
             'fade', 'fadeLeft', 'fadeRight', 'fadeTop', 'fadeBottom', 'fadeTopLeft', 'fadeBottomRight',
             'blindsLeft', 'blindsRight', 'blindsTop', 'blindsBottom', 'blindsTopLeft', 'blindsBottomRight',
             'curtainLeft', 'curtainRight', 'interlaceLeft', 'interlaceRight', 'mosaic', 'bomb', 'fumes'
         ]);
-*/
         $('#slider').vmcSlider('option', 'width', 1000);
-        //$('#slider').vmcSlider('option', 'autoPlay', true);
+        $('#slider').vmcSlider('option', 'autoPlay', true);
+        */
 
     });
     </script>

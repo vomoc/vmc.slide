@@ -305,16 +305,16 @@
         if (ie6 && opts.ie6Tidy) {
             return 'fade';
         } else {
-            var i = 0;
+            var i = the.effectIndex;
             if (opts.random === true) {
-                i = Math.floor(opts.effects.length * Math.random());
+                the.effectIndex = Math.floor(opts.effects.length * Math.random());
             } else {
-                i = the.effectIndex;
                 the.effectIndex++;
-                if (the.effectIndex >= opts.effects.length) {
-                    the.effectIndex = 0;
-                }
             }
+            if (the.effectIndex >= opts.effects.length) {
+                the.effectIndex = 0;
+            }
+            i = i >= opts.effects.length ? 0 : i;
             return opts.effects[i];
         }
     };
