@@ -74,6 +74,10 @@
         gridVertical: 20,
         // 栅格行数
         gridHorizontal: 10,
+        // 是否显示侧边按钮
+        sideButton: true,
+        // 是否显示原点按钮
+        navButton: true,
         // 自动播放
         autoPlay: true,
         // 图片按照升序播放
@@ -97,6 +101,7 @@
     // 设置配置参数
     vmcSlider.prototype.option = function(name, value) {
         var the = this,
+            elem = the.elem,
             opts = the.options;
         opts[name] = value;
         if ($.inArray(name, ['width', 'height']) > 0) {
@@ -104,6 +109,20 @@
         }
         if ($.inArray(name, ['width', 'height', 'gridCol', 'gridRow', 'gridVertical', 'gridHorizontal']) > 0) {
             the._buildStage();
+        }
+        if (name === 'sideButton') {
+            if (true === value) {
+                elem.find('.vui-prev,.vui-next').show();
+            } else {
+                elem.find('.vui-prev,.vui-next').hide();
+            }
+        }
+        if (name === 'navButton') {
+            if (true === value) {
+                elem.find('.vui-buttons').show();
+            } else {
+                elem.find('.vui-buttons').hide();
+            }
         }
     };
     //**************************************************************************************************************
@@ -124,6 +143,14 @@
         elem.find('.vui-item').eq(the.index).show();
         // 初始化按钮
         elem.find('.vui-button').eq(the.index).addClass('vui-button-cur');
+        // 隐藏侧边按钮
+        if (false === opts.sideButton) {
+            elem.find('.vui-prev,.vui-next').hide();
+        }
+        // 隐藏圆点按钮
+        if (false === opts.navButton) {
+            elem.find('.vui-buttons').hide();
+        }
         // 触发创建事件
         elem.trigger('vmcslidercreate', the);
         // 自动播放
@@ -314,7 +341,9 @@
             if (the.effectIndex >= opts.effects.length) {
                 the.effectIndex = 0;
             }
-            i = i >= opts.effects.length ? 0 : i;
+            if (i >= opts.effects.length) {
+                i = 0;
+            }
             return opts.effects[i];
         }
     };
