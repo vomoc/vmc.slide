@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1"/>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8"/>
+    <title>Demo - vmcSlider 图片轮播插件 - 维米客网页工作室 Vomoc Web Studio</title>
+    <meta http-equiv="Content-Style-Type" content="text/css"/>
+    <meta http-equiv="Content-Script-Type" content="text/javascript"/>
+    <script type="text/javascript" src="../lib/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../dist/vmc.slider.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../dist/css/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+
+<body>
+<div id="slider">
+    <a href="javascript:;"><img src="demo1.jpg"/></a>
+    <a href="javascript:;"><img src="demo2.jpg"/></a>
+    <a href="javascript:;"><img src="demo3.jpg"/></a>
+    <a href="javascript:;"><img src="demo4.jpg"/></a>
+    <a href="javascript:;"><img src="demo5.jpg"/></a>
+    <a href="javascript:;"><img src="demo6.jpg"/></a>
+</div>
+<div class="">
+    <h3>选项</h3>
+    <ul>
+        <li>
+            <input type="checkbox" name="autoPlay" id="autoPlay" checked="checked">
+            <label for="autoPlay">自动播放</label>
+        </li>
+        <li>
+            <input type="checkbox" name="random" id="random">
+            <label for="random">启用随机效果</label>
+        </li>
+        <li>
+            <input type="checkbox" name="sideButton" id="sideButton" checked="checked">
+            <label for="sideButton">显示侧边翻页按钮</label>
+        </li>
+        <li>
+            <input type="checkbox" name="navButton" id="navButton" checked="checked">
+            <label for="navButton">显示圆点导航按钮</label>
+        </li>
+        <li>
+            <input type="checkbox" name="ascending" id="ascending" checked="checked">
+            <label for="ascending">升序播放</label>
+        </li>
+        <li>
+            <label for="duration">停留时间</label>
+            <select id="duration">
+                <option value="1000" selected="selected">快（1000毫秒）</option>
+                <option value="4000">默认（4000毫秒）</option>
+            </select>
+        </li>
+    </ul>
+    <h3>过场效果</h3>
+    <ul id="effects">
+        <li>
+            <input type="checkbox" name="selectall" id="selectall" checked="checked">
+            <label for="selectall">全选/全不选</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fade" value="fade" checked="checked">
+            <label for="effects-fade">淡入淡出[fade]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fadeLeft" value="fadeLeft" checked="checked">
+            <label for="effects-fadeLeft">左侧栅格淡入[fadeLeft]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fadeRight" value="fadeRight" checked="checked">
+            <label for="effects-fadeRight">右侧栅格淡入[fadeRight]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fadeTop" value="fadeTop" checked="checked">
+            <label for="effects-fadeTop">顶部栅格淡入[fadeTop]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fadeBottom" value="fadeBottom" checked="checked">
+            <label for="effects-fadeBottom">底部栅格淡入[fadeBottom]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fadeTopLeft" value="fadeTopLeft" checked="checked">
+            <label for="effects-fadeTopLeft">左上45度栅格淡入[fadeTopLeft]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fadeBottomRight" value="fadeBottomRight"
+                   checked="checked">
+            <label for="effects-fadeBottomRight">右下45度栅格淡入[fadeBottomRight]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-blindsLeft" value="blindsLeft" checked="checked">
+            <label for="effects-blindsLeft">左侧百叶窗[blindsLeft]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-blindsRight" value="blindsRight" checked="checked">
+            <label for="effects-blindsRight">右侧百叶窗[blindsRight]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-blindsTop" value="blindsTop" checked="checked">
+            <label for="effects-blindsTop">顶部百叶窗[blindsTop]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-blindsBottom" value="blindsBottom" checked="checked">
+            <label for="effects-blindsBottom">底部百叶窗[blindsBottom]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-blindsTopLeft" value="blindsTopLeft" checked="checked">
+            <label for="effects-blindsTopLeft">左上百叶窗[blindsTopLeft]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-blindsBottomRight" value="blindsBottomRight"
+                   checked="checked">
+            <label for="effects-blindsBottomRight">右下百叶窗[blindsBottomRight]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-curtainLeft" value="curtainLeft" checked="checked">
+            <label for="effects-curtainLeft">左侧幕布[curtainLeft]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-curtainRight" value="curtainRight" checked="checked">
+            <label for="effects-curtainRight">右侧幕布[curtainRight]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-interlaceLeft" value="interlaceLeft" checked="checked">
+            <label for="effects-interlaceLeft">左侧交叉[interlaceLeft]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-interlaceRight" value="interlaceRight" checked="checked">
+            <label for="effects-interlaceRight">右侧交叉[interlaceRight]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-mosaic" value="mosaic" checked="checked">
+            <label for="effects-mosaic">马赛克[mosaic]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-bomb" value="bomb" checked="checked">
+            <label for="effects-bomb">爆炸[bomb]</label>
+        </li>
+        <li>
+            <input type="checkbox" name="effects" id="effects-fumes" value="fumes" checked="checked">
+            <label for="effects-fumes">烟幕[fumes]</label>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        /* 创建轮播效果 */
+        $('#slider').vmcSlider({
+            effects: [],
+            duration: 1000
+        });
+
+        /* 获取效果列表 */
+        var getEffects = function () {
+            var effects = new Array;
+            $('input[name="effects"]:checked').each(function () {
+                effects.push($(this).val());
+            });
+            return effects;
+        };
+
+        $('#effects').on('click', 'input[name="effects"]', function () {
+            $('#slider').vmcSlider('option', 'effects', getEffects());
+        });
+
+        $('#slider').vmcSlider('option', 'effects', getEffects());
+
+        /* 全选/全不选 */
+        $('#selectall').on('click', function () {
+            $('input[name="effects"]').prop('checked', $(this).prop('checked'));
+            $('#slider').vmcSlider('option', 'effects', getEffects());
+        });
+
+
+        /* 翻页事件 */
+        $('#slider').on('vmcsliderflip', function (e, ui) {
+            $('#effects').find('li').removeClass('active');
+            var name = ui.options.effects[ui.effectIndex];
+            $('#effects-' + name).closest('li').addClass('active');
+        });
+
+        /* 自动播放 */
+        $('#autoPlay').on('click', function () {
+            $('#slider').vmcSlider('option', 'autoPlay', $(this).prop('checked'));
+        });
+
+        /* 随机效果 */
+        $('#random').on('click', function () {
+            $('#slider').vmcSlider('option', 'random', $(this).prop('checked'));
+        });
+
+
+        /* 显示侧边翻页按钮 */
+        $('#sideButton').on('click', function () {
+            $('#slider').vmcSlider('option', 'sideButton', $(this).prop('checked'));
+        });
+
+        /* 显示圆点导航按钮 */
+        $('#navButton').on('click', function () {
+            $('#slider').vmcSlider('option', 'navButton', $(this).prop('checked'));
+        });
+
+        /* 升序播放 */
+        $('#ascending').on('click', function () {
+            $('#slider').vmcSlider('option', 'ascending', $(this).prop('checked'));
+        });
+
+        $('#duration').on('change', function () {
+            $('#slider').vmcSlider('option', 'duration', $(this).val());
+        });
+
+    });
+</script>
+</body>
+
+</html>
