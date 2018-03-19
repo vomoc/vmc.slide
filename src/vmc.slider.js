@@ -1,34 +1,33 @@
 /**
- * VmcSlider 图片轮播插件 v1.1.0
+ * VmcSlider 图片轮播插件 v1.2.0
  * 维米客网页工作室 Vomoc Web Studio
  * http://www.vomoc.com/vmc/slider/
  * vomoc@qq.com
- * 2015/11/14
+ * 2017/03/17
  **/
-;
-(function($, undefined) {
+;(function ($, undefined) {
     var dataKey = 'vomoc';
-    var ie6 = !-[1, ] && !window.XMLHttpRequest;
+    var ie6 = !-[1,] && !window.XMLHttpRequest;
     var effects = {
-        'fade': function() {
+        'fade': function () {
             var the = this,
                 elem = the.elem,
                 opts = the.options;
             elem.find('.vui-item').eq(the.index).css({
                 display: 'none',
                 zIndex: 2
-            }).fadeIn(opts.speed, function() {
+            }).fadeIn(opts.speed, function () {
                 the._afterTransfer();
             });
         }
     };
     //**************************************************************************************************************
     // 图片轮播插件
-    $.fn.vmcSlider = function(settings) {
+    $.fn.vmcSlider = function (settings) {
         var run = $.type(settings) === 'string',
             args = [].slice.call(arguments, 1);
         if (!this.length) return;
-        return this.each(function() {
+        return this.each(function () {
             var $element = $(this),
                 instance = $element.data(dataKey);
             if (run && settings.charAt(0) !== '_' && instance) {
@@ -42,7 +41,7 @@
     };
     //**************************************************************************************************************
     // 效果插件
-    $.vmcSliderEffects = function() {
+    $.vmcSliderEffects = function () {
         if ($.isPlainObject(arguments[0])) {
             effects = $.extend({}, effects, arguments[0]);
         } else if ($.type(arguments[0]) === 'string' && $.type(arguments[1]) === 'function') {
@@ -51,7 +50,7 @@
     };
     //**************************************************************************************************************
     // 构造函数
-    var vmcSlider = function($element, settings) {
+    var vmcSlider = function ($element, settings) {
         var the = this;
         the.options = $.extend({}, the.options, settings);
         the.elem = $element;
@@ -93,13 +92,15 @@
         // 转场效果时长（毫秒）
         speed: 900,
         // 翻页时触发事件
-        flip: function(event, vi) {},
+        flip: function (event, vi) {
+        },
         // 创建完成触发事件
-        create: function(event, vi) {}
+        create: function (event, vi) {
+        }
     };
     //**************************************************************************************************************
     // 设置配置参数
-    vmcSlider.prototype.option = function(name, value) {
+    vmcSlider.prototype.option = function (name, value) {
         var the = this,
             elem = the.elem,
             opts = the.options;
@@ -127,7 +128,7 @@
     };
     //**************************************************************************************************************
     // 初始化
-    vmcSlider.prototype._init = function() {
+    vmcSlider.prototype._init = function () {
         var the = this,
             elem = the.elem,
             opts = the.options;
@@ -155,8 +156,8 @@
         elem.trigger('vmcslidercreate', the);
         // 自动播放
         if (true === opts.autoPlay) {
-            $(window).on('load', function() {
-                the.time = setTimeout(function() {
+            $(window).on('load', function () {
+                the.time = setTimeout(function () {
                     if (true === opts.ascending) {
                         the._next();
                     } else {
@@ -168,13 +169,13 @@
     };
     //**************************************************************************************************************
     // 创建slider
-    vmcSlider.prototype._create = function() {
+    vmcSlider.prototype._create = function () {
         var the = this,
             elem = the.elem,
             sliderHtml = '',
             itemHtml = '',
             buttonHtml = '';
-        elem.children().each(function() {
+        elem.children().each(function () {
             itemHtml += '<div class="vui-item">' + $(this).html() + '</div>';
             buttonHtml += '<div class="vui-button"></div>';
         });
@@ -189,7 +190,7 @@
     };
     //**************************************************************************************************************
     // 创建舞台html
-    vmcSlider.prototype._buildStage = function() {
+    vmcSlider.prototype._buildStage = function () {
         var the = this,
             opts = the.options,
             gridWidth, gridHeight;
@@ -215,7 +216,7 @@
     };
     //**************************************************************************************************************
     // 设置尺寸
-    vmcSlider.prototype._setSize = function() {
+    vmcSlider.prototype._setSize = function () {
         var the = this,
             elem = the.elem,
             opts = the.options;
@@ -226,15 +227,15 @@
     };
     //**************************************************************************************************************
     // 绑定事件
-    vmcSlider.prototype._bind = function() {
+    vmcSlider.prototype._bind = function () {
         var the = this,
             elem = the.elem,
             opts = the.options;
-        elem.on('mouseover', '.vui-prev,.vui-next', function() {
+        elem.on('mouseover', '.vui-prev,.vui-next', function () {
             $(this).addClass('vui-sidebutton-hover');
-        }).on('mouseout', '.vui-prev,.vui-next', function() {
+        }).on('mouseout', '.vui-prev,.vui-next', function () {
             $(this).removeClass('vui-sidebutton-hover');
-        }).on('click', '.vui-prev,.vui-next,.vui-button', function() {
+        }).on('click', '.vui-prev,.vui-next,.vui-button', function () {
             if (false === the.animateStatus) {
                 clearTimeout(the.time);
                 if ($(this).hasClass('vui-next')) {
@@ -246,15 +247,15 @@
                     the._play();
                 }
             }
-        }).on('vmcsliderflip', function(e) {
+        }).on('vmcsliderflip', function (e) {
             opts.flip.call(elem[0], e, the);
-        }).on('vmcslidercreate', function(e) {
+        }).on('vmcslidercreate', function (e) {
             opts.create.call(elem[0], e, the);
         });
     };
     //**************************************************************************************************************
     // 播放
-    vmcSlider.prototype._play = function() {
+    vmcSlider.prototype._play = function () {
         var the = this,
             elem = the.elem,
             opts = the.options;
@@ -274,7 +275,7 @@
     };
     //**************************************************************************************************************
     // 转场效果结束
-    vmcSlider.prototype._afterTransfer = function() {
+    vmcSlider.prototype._afterTransfer = function () {
         var the = this,
             elem = the.elem,
             opts = the.options;
@@ -283,7 +284,7 @@
         the.animateStatus = false;
         // 下一次
         if (true === opts.autoPlay) {
-            the.time = setTimeout(function() {
+            the.time = setTimeout(function () {
                 if (true === opts.ascending) {
                     the._next();
                 } else {
@@ -294,7 +295,7 @@
     };
     //**************************************************************************************************************
     // 设置舞台
-    vmcSlider.prototype._setStage = function(stage) {
+    vmcSlider.prototype._setStage = function (stage) {
         var the = this,
             elem = the.elem;
         the.url = elem.find('.vui-item').eq(the.index).find('img')[0].src;
@@ -304,7 +305,7 @@
     };
     //**************************************************************************************************************
     // 上一张
-    vmcSlider.prototype._prev = function() {
+    vmcSlider.prototype._prev = function () {
         var the = this,
             elem = the.elem;
         the.index--;
@@ -315,7 +316,7 @@
     };
     //**************************************************************************************************************
     // 下一张
-    vmcSlider.prototype._next = function() {
+    vmcSlider.prototype._next = function () {
         var the = this,
             elem = the.elem;
         the.index++;
@@ -326,7 +327,7 @@
     };
     //**************************************************************************************************************
     // 获取转场效果名称
-    vmcSlider.prototype._getEffect = function() {
+    vmcSlider.prototype._getEffect = function () {
         var the = this,
             opts = the.options;
         if (ie6 && opts.ie6Tidy) {
