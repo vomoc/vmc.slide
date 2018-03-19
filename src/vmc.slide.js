@@ -1,7 +1,7 @@
 /**
- * VmcSlider 图片轮播插件 v1.2.0
+ * VmcSlider 图片轮播插件 v2.0.0
  * 维米客网页工作室 Vomoc Web Studio
- * http://www.vomoc.com/vmc/slider/
+ * http://www.vomoc.com/vmc/slide/
  * vomoc@qq.com
  * 2017/03/17
  **/
@@ -34,13 +34,11 @@
                     the._resetTransfer(index);
                 });
             } else {
-                // the.transfer[4].append(the.transfer[4].children('.vui-slide-grid').first());
 
                 the.transfer[4].show().css('left', -the.width).animate({
                     left: 0
                 }, opts.speed, function () {
                     the._resetTransfer(index);
-                    // the.transfer[4].append(the.transfer[4].children().first());
                 });
             }
 
@@ -116,6 +114,52 @@
                         the._resetTransfer(index);
                     });
             }
+
+        },
+        'page2': function (index) {
+            var the = this,
+                opts = the.options;
+
+            the.transfer[0].show()
+                .children('.vui-slide-grid')
+                .css({
+                    opacity: 0,
+                    // margin:40,
+                    width: 0,
+                    height: 0,
+                    borderRadius: '50%'
+                })
+                .each(function (i) {
+                    var $this = $(this);
+                    var x = i % opts.gridTdX;
+                    var y = Math.floor(i / opts.gridTdX);
+                    var delay = ((y + 1) / opts.gridTdY + (x + 1) / opts.gridTdX) / 2;
+                    delay = opts.speed / 3 * 2 * delay;
+                    $this.css({
+                        marginLeft: parseInt($this.data('width')) / 2,
+                        marginTop: parseInt($this.data('height')) / 2,
+                        backgroundPositionX: -(parseInt($this.data('imgLeft')) + parseInt($this.data('width')) / 2),
+                        backgroundPositionY: -(parseInt($this.data('imgTop')) + parseInt($this.data('height')) / 2)
+                    });
+                    $this.animate({
+                        opacity: 0.6,
+                        marginLeft: 0,
+                        marginTop: 0,
+                        backgroundPositionX: -parseInt($this.data('imgLeft')),
+                        backgroundPositionY: -parseInt($this.data('imgTop')),
+                        width: $this.data('width'),
+                        height: $this.data('height'),
+                        // borderRadius:0
+                    }, opts.speed / 3 * 2, 'linear').animate({
+                        opacity: 1,
+                        borderRadius: 0
+                    }, opts.speed / 3, 'linear');
+                })
+                .last()
+                .queue(function () {
+                    the._resetTransfer(index);
+                });
+
 
         },
         // 横向卷帘
@@ -299,6 +343,7 @@
         the.imgHeight = 0;
         // 是否自动播放
         the.auto = the.options.autoPlay;
+        the.timer = null;
     };
 
     vmcSlide.prototype.options = {
@@ -318,27 +363,30 @@
         // 二维网格y轴切割份数（行数）
         gridTdY: 5,
         // 一维栅格x轴切割份数（列数）
-        gridOdX: 20,
+        gridOdX: 30,
         // 一维栅格y轴切割份数（行数）
         gridOdY: 10,
         // 是否显示侧边按钮
         sideButton: true,
         // 是否显示原点按钮
         navButton: true,
+        showText: 'auto',
+        isHtml: false,
         // 自动播放
         autoPlay: true,
         // 图片按照升序播放
         ascending: true,
         // 使用的转场动画效果
-        effects: ['fade'],
+        effects: ['fade', 'slideX', 'slideY', 'page','page2', 'rollingX', 'rollingY', 'blindsX', 'blindsY'],
         // IE6下精简效果
         ie6Tidy: false,
         // 随机使用转场动画效果
-        random: false,
+        random: true,
         // 图片停留时长（毫秒）
         duration: 4000,
         // 转场效果时长（毫秒）
         speed: 800,
+        hoverStop: true,
         // 翻页时触发事件
         flip: function (event, vi) {
         },
@@ -359,21 +407,39 @@
         the._buildStage();
 
         // 初始化场景
-        the._setScene(the.index);
+        // the._setScene(the.index);
 
         // 初始化尺寸
         the._setSize();
 
         // 播放下一张
-        the._next();
+        the._resetTransfer(the.index);
 
+        // 鼠标进入停止自动播放
         the.mimic.on('click', '.vui-slide-handle-button', function () {
             the._goto($(this).index());
+        }).on('mouseenter', function () {
+            the.mimic.find('.vui-slide-side-buttons').children().addClass('hover');
+            if (opts.hoverStop) {
+                clearTimeout(the.timer);
+                the.auto = false;
+            }
+        }).on('mouseleave', function () {
+            the.mimic.find('.vui-slide-side-buttons').children().removeClass('hover');
+            if (opts.hoverStop) {
+                the.auto = the.options.autoPlay;
+                if (!the.animateStatus) {
+                    the._resetTransfer(the.index);
+                }
+            }
         });
         // 浏览器事件
         $(window).on('resize', function () {
             the._setSize();
+            // the.mimic.find('.vui-slide-grid').stop(true, true);
         });
+
+
     };
 
     /**
@@ -392,6 +458,7 @@
                 target: $this.data('target') || $this.find('a').attr('target')
             };
         }).toArray();
+
         the.data = sceneData.concat(opts.data);
     };
 
@@ -442,7 +509,6 @@
 
     };
 
-
     /**
      * 设置当前圆点按钮
      * @param index
@@ -457,6 +523,24 @@
             .addClass('active');
     };
 
+    vmcSlide.prototype._setText = function (index) {
+        var the = this,
+            opts = the.options;
+        var text = the.data[index].text || '';
+        var isShow = $.type(opts.showText) === 'boolean' ? opts.showText : !!text;
+        var $text = the.mimic.children('.vui-slide-text');
+
+        if (opts.isHtml) {
+            $text.html(text);
+        } else {
+            $text.html($('<div>').addClass('text').text(text));
+        }
+
+        the.mimic
+            .children('.vui-slide-mask,.vui-slide-text')
+            .toggle(isShow);
+    };
+
     /**
      * 创建舞台
      * @private
@@ -467,6 +551,8 @@
         the._buildScene();
         the._buildTransfer();
         the._buildHandleButton();
+        the._buildSideButton();
+        the._buildText();
         the.elem.empty().append(the.mimic);
     };
 
@@ -547,6 +633,41 @@
     };
 
     /**
+     * 添加侧边按钮
+     * @private
+     */
+    vmcSlide.prototype._buildSideButton = function () {
+        var the = this,
+            opts = the.options;
+        // 侧边翻页按钮
+        var $pageButtons = $('<div>')
+            .addClass('vui-slide-side-buttons')
+            .toggle(opts.sideButton);
+        var $pageNext = $('<div>')
+            .addClass('vui-slide-side-button next')
+            .on('click', function () {
+                the._next();
+            });
+        var $pagePrev = $('<div>')
+            .addClass('vui-slide-side-button prev')
+            .on('click', function () {
+                the._prev();
+            });
+        $pageButtons
+            .append($pageNext)
+            .append($pagePrev);
+        the.mimic.append($pageButtons);
+    };
+
+    vmcSlide.prototype._buildText = function () {
+        var the = this;
+        var $textMask = $('<div class="vui-slide-mask" style="display:none;"></div>');
+        var $text = $('<div class="vui-slide-text" style="display:none;"></div>');
+        the.mimic.append($textMask);
+        the.mimic.append($text);
+    };
+
+    /**
      * 设置舞台尺寸
      * @private
      */
@@ -608,12 +729,19 @@
             var height = index >= (opts.gridTdY - 1) * opts.gridTdX ? lastXyHeight : xyHeight;
             var top = xyHeight * Math.floor(index / opts.gridTdX);
             var left = xyWidth * (index % opts.gridTdX);
-            $(this).height(height).width(width).data({width: width, height: height}).css({
-                top: top,
-                left: left,
-                backgroundSize: imgWidth + 'px ' + imgHeight + 'px',
-                backgroundPosition: '-' + (imgLeft + left) + 'px -' + (imgTop + top) + 'px'
-            });
+            $(this).height(height).width(width)
+                .data({
+                    width: width,
+                    height: height,
+                    imgLeft: imgLeft + left,
+                    imgTop: imgTop + top
+                })
+                .css({
+                    top: top,
+                    left: left,
+                    backgroundSize: imgWidth + 'px ' + imgHeight + 'px',
+                    backgroundPosition: '-' + (imgLeft + left) + 'px -' + (imgTop + top) + 'px'
+                });
         });
 
         // 设置一维转场X轴切片位置尺寸
@@ -736,6 +864,8 @@
             opts = the.options;
 
 
+        clearTimeout(the.timer);
+
         if (!the.animateStatus && the.data.length > 1) {
             the.animateStatus = true;
 
@@ -743,12 +873,12 @@
             the._setHandleButtonActive(index);
 
             // 设置说明文本
-            // the._setSummary(index);
+            the._setText(index);
 
             // 设置转场切片
             the._setTransferGrid(index);
 
-            effects['blindsY'].call(the, [index]);
+            effects[the._getEffect()].call(the, index);
         }
     };
 
@@ -758,11 +888,49 @@
      * @private
      */
     vmcSlide.prototype._resetTransfer = function (index) {
-        var the = this;
+        var the = this,
+            opts = the.options;
+
+
         the.index = index;
         the._setScene(index);
         the.mimic.find('.vui-slide-grid').clearQueue();
         the.mimic.children('.vui-slide-transfer').hide();
+        the._setHandleButtonActive(index);
+        the._setText(index);
         the.animateStatus = false;
+
+        if (true === the.auto) {
+            the.timer = setTimeout(function () {
+                if (opts.ascending) {
+                    the._next();
+                } else {
+                    the._prev();
+                }
+            }, opts.duration);
+        }
+    };
+
+    vmcSlide.prototype._getEffect = function () {
+        var the = this,
+            opts = the.options;
+        if (ie6 && opts.ie6Tidy) {
+            return 'fade';
+        } else if (!ie9plus) {
+        } else {
+            var i = the.effectIndex;
+            if (opts.random === true) {
+                the.effectIndex = Math.floor(opts.effects.length * Math.random());
+            } else {
+                the.effectIndex++;
+            }
+            if (the.effectIndex >= opts.effects.length) {
+                the.effectIndex = 0;
+            }
+            if (i >= opts.effects.length) {
+                i = 0;
+            }
+            return opts.effects[i];
+        }
     };
 })(jQuery);

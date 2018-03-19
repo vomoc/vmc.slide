@@ -10,9 +10,11 @@
     <script type="text/javascript">
         $(function () {
             $('#slide').vmcSlide({
-
+                duration: 1000,
+                speed: 800
+                // , effects: ['page2']
+                , showText: true
             });
-
 
 
         });
@@ -23,7 +25,7 @@
 
 <div id="slide">
     <ul>
-        <li><a href="javascript:;"><img src="demo1.jpg"/></a></li>
+        <li data-text="这是文本"><a href="javascript:;"><img src="demo1.jpg"/></a></li>
         <li><a href="javascript:;"><img src="demo2.jpg"/></a></li>
         <li><a href="javascript:;"><img src="demo3.jpg"/></a></li>
         <li><a href="javascript:;"><img src="demo4.jpg"/></a></li>
@@ -32,7 +34,6 @@
     </ul>
 </div>
 
-<div style="height: 400px;background-image: url('demo2.jpg');background-size: cover;background-position: center center;"></div>
 
 </body>
 </html>

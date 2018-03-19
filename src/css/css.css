@@ -5,6 +5,7 @@
     padding: 0;
     margin: 0;
 }
+/************************************************/
 
 .vui-slide-scene {
     display: block;
@@ -19,6 +20,7 @@
     width: 100%;
 }
 
+/************************************************/
 
 .vui-slide-transfer {
     overflow: hidden;
@@ -34,6 +36,7 @@
     /*background-color: #000000;*/
 
 }
+/************************************************/
 
 .vui-slide-grid {
     position: absolute;
@@ -42,16 +45,10 @@
     background-repeat: no-repeat;
 
 }
+/************************************************/
 
-.vui-mask {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 30%;
-    background: #000000;
-    opacity: 0.3;
-}
+
+/************************************************/
 
 .vui-slide-handle-buttons {
     position: absolute;
@@ -77,4 +74,81 @@
 }
 .vui-slide-handle-buttons .active{
     background: #CC0000;
+}
+/************************************************/
+.vui-slide-side-buttons {
+    z-index: 80;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 0;
+    width: 100%;
+}
+
+.vui-slide-side-button {
+    position: absolute;
+    height: 120px;
+    width: 60px;
+    background: transparent no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.vui-slide-side-buttons .next {
+    top: -60px;
+    right: 0;
+    border-radius: 20px 0 0 20px;
+    background-image: url("next.gif");
+}
+
+.vui-slide-side-buttons .prev {
+    top: -60px;
+    left: 0;
+    border-radius: 0 20px 20px 0;
+    background-image: url("prev.gif");
+}
+
+.vui-slide-side-buttons .hover {
+    background-color: #000;
+    filter: alpha(Opacity=40);
+    -moz-opacity: 0.4;
+    opacity: 0.4;
+}
+
+
+/************************************************/
+
+.vui-slide-mask {
+    z-index: 50;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: #000;
+    filter: alpha(Opacity=30);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
+}
+
+.vui-slide-text {
+    z-index: 60;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    overflow: hidden;
+}
+
+.vui-slide-text .text {
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.vui-slide-text a {
+    color: #ffffff;
+    text-decoration: none;
 }
