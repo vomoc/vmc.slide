@@ -1,14 +1,13 @@
-# vmcSlide 图片轮播插件
-
-* 详细说明 <http://www.vomoc.com/vmc/slider>
+# vmc.slide 图片轮播JQuery插件
 
 ### 更新说明
-v2.0.0
-2018.3.20
-1. 宽度可随父层元素变化，支持响应式网页
+
+v2.0.0 - 2018.3.20
+
+1. 轮播图宽度可随父层元素变化，支持响应式网页
 2. 解决过场动画缝隙BUG
-3. 特效显示，固定尺寸下兼容到IE6，尺寸不固定时兼容到IE9，不兼容情况显示默认淡入淡出转场
-4. 大版本更新，对1.0版本不能无缝升级。
+3. 特效显示，固定尺寸可兼容到IE6，不固定尺寸兼容到IE9。不兼容情况显示默认淡入淡出转场
+4. 代码重构，对 `1.x` 版本不能无缝升级。
 
 ### 特点
 
@@ -18,78 +17,176 @@ v2.0.0
 4. 提供接口，支持自定义转场效果。方便网页开发者自行编写更多转场特效。
 5. 优化转场特效算法提高执行效率。
 
+### 使用
+
+```html
+<script src="jquery-1.11.2.min.js"></script>
+<script src="vmc.slide.js"></script>
+<script src="vmc.slide.effects.js"></script>
+```
+
+##### 方法一，使用 `html` 载入场景数据
+```html
+<div id="slide">
+    <ul>
+         <li data-text="这是文本"><a href="javascript:;" target="_blank"><img src="demo1.jpg"/></a></li>
+         ...
+    </ul>
+</div>
+
+<script>
+    var options = {};
+    $('#slide').vmcSlide(options);
+</script>
+```
+
+##### 方法二，使用选项 `option.data` 载入场景数据
+```html
+<div id="slide"></div>
+
+<script>
+    var options = {
+        data: [
+            {
+                src: 'demo.jpg',
+                text: '这是demo',
+                href: 'http://www.vomoc.com/slide',
+                target: '_blank'
+            },
+            ...
+        ]
+    };
+    $('#slide').vmcSlide(options);
+</script>
+```
+
 ### 选项
 
+##### data
+* 类型：array，默认值：[]
+* 场景数据
+* 说明：插件会从li标签解析数据与data数据合并，生成最终场景数据
+```javascript
+// 示例
+[
+    {
+        src: 'demo.jpg', // 图片地址
+        text: '这是demo', // 说明文本
+        href: 'http://www.vomoc.com/slide', // 超链接
+        target: '_blank' // 链接打开方式
+    }
+]
+```
+
 ##### width
-* 类型：int，默认值：1000，单位：px
+* 类型：int/string，默认值：'auto'，单位：px
 * 宽度
+* 说明：为'auto'时，轮播图宽度随父层变化
 
 ##### height
-* 类型：int，默认值：330，单位：px
+* 类型：int/string，默认值：'auto'，单位：px
 * 高度
+* 说明：为'auto'时，轮播图高度随父层变化
 
-##### gridCol
+##### imgWidth
+* 类型：int，默认值：0，单位：px
+* 图片实际宽度
+* 说明：为0时，图片实际宽度按照轮播图宽度计算
+
+##### imgHeight
+* 类型：int，默认值：0，单位：px
+* 图片实际高度
+* 说明：为0时，图片实际高度按照轮播图高度计算
+
+##### minWidth
+* 类型：int，默认值：0，单位：px
+* 轮播图最小宽度
+
+##### minHeight
+* 类型：int，默认值：0，单位：px
+* 轮播图最小高度
+
+##### gridTdX
 * 类型：int，默认值：10
-* 网格列数，为同时在垂直和水平方向都有变化的转场效果提供舞台切片的列数。
+* 网格切片模式下x轴切片份数
 
-##### gridRow
+##### gridTd
 * 类型：int，默认值：5
-* 网格行数，为同时在垂直和水平方向都有变化的转场效果提供舞台切片的行数。
+* 网格切片模式下y轴切片份数
 
-##### gridVertical
-* 类型：int，默认值：20
-* 栅格列数，为只在水平方向上变化的转场效果提供舞台切片的列数。
+##### gridOdX
+* 类型：int，默认值：30
+* 水平切片模式下x轴切片份数
 
-##### gridHorizontal
+##### gridOdY
 * 类型：int，默认值：10
-* 栅格行数，为只在垂直方向上变化的转场效果提供舞台切片的行数。
+* 垂直切片模式下y轴切片份数
+
+##### sideButton
+* 类型：boolean，默认值：true
+* 是否显示两侧翻页按钮
+
+##### navButton
+* 类型：boolean，默认值：true
+* 是否显示导航圆点按钮
+
+##### showText
+* 类型：boolean/string，默认值：'auto'
+* 是否显示说明文本
+* 说明：为'auto'时，只有场景数据中text不为空才显示
+
+##### isHtml
+* 类型：boolean，默认值：false
+* 说明文本是否是HTML
 
 ##### autoPlay
 * 类型：boolean，默认值：true
-* 是否自动播放。
+* 是否自动播放
 
 ##### ascending
 * 类型：boolean，默认值：true
-* 图片按照升序播放。
+* 是否按照升序播放
 
 ##### effects
 * 类型：array，默认值：['fade']
-* 使用的转场动画效果列表。插件自身只有淡入淡出(fade)效果可用。使用更多效果，可引入vmc.slider.effects.js效果库，或者自定义动画效果。
-* 数组长度为0时不显示转场动画效果，您也可根据需要选择部分效果使用，在非随机情况下按照数组定义顺序显示动画效果。
+* 转场动画效果名称
+* 说明：默认效果 `fade` 可兼容低版本IE浏览器，其他效果需要引入 `vmc.slide.effects.js` 扩展，或者自定义编写。效果名称请查看 `vmc.slide.effects.js` 。 `vmc.slide.full.min.js` 已包含 `vmc.slide.effects.js`。
 
 ##### ie6Tidy
 * 类型：boolean，默认值：false
-* IE6下精简转场效果，只保留淡入淡出效果。
+* 是否IE6下精简效果
 
 ##### random
-* 类型：boolean，默认值：false
-* 随机使用转场动画效果。
+* 类型：boolean，默认值：true
+* 是否随机使用转场动画效果
 
 ##### duration
 * 类型：int，默认值：4000，单位：毫秒
-* 图片停留时长。
+* 图片停留时长
 
 ##### speed
-* 类型：int，默认值：900，单位：毫秒
-* 转场效果时长。
+* 类型：int，默认值：800，单位：毫秒
+* 转场效果时长
+
+##### hoverStop
+* 类型：boolean，默认值：true
+* 是否鼠标悬停暂停动画
 
 ##### flip
 * 类型：function
-* 翻页时触发事件。
+* 翻页回调
+* 参数：
 
-##### speed
+```javascript
+formIndex  // 离开场景索引
+toIndex // 打开场景索引
+```
+
+##### created
 * 类型：function
-* 创建完成触发事件。
+* 创建完成回调
 
 ### 方法
 
 ##### option(optionName, value)
 * 设置选项值
-
-### 事件
-
-##### vmcsliderflip(event, vmcslider)
-* 切换图片时触发该事件
-
-##### vmcslidercreate(event, vmcslider)
-* vmcSlider 被创建时触发该事件
