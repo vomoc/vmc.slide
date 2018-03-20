@@ -5,23 +5,30 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1"/>
     <meta http-equiv="Content-type" content="text/html;charset=utf-8"/>
-    <title>Demo - vmcSlider 图片轮播插件 - 维米客网页工作室 Vomoc Web Studio</title>
+    <title>Demo - vmcSlide 图片轮播插件 - 维米客网页工作室 Vomoc Web Studio</title>
     <meta http-equiv="Content-Style-Type" content="text/css"/>
     <meta http-equiv="Content-Script-Type" content="text/javascript"/>
     <script type="text/javascript" src="../lib/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="../dist/vmc.slider.full.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../dist/css/style.css">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script type="text/javascript" src="../src/vmc.slide.js"></script>
+    <script type="text/javascript" src="../src/vmc.slide.effects.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/css/style.css">
+    <style type="text/css">
+        .active {
+            color: #B10000;
+        }
+    </style>
 </head>
 
 <body>
-<div id="slider">
-    <a href="javascript:;"><img src="demo1.jpg"/></a>
-    <a href="javascript:;"><img src="demo2.jpg"/></a>
-    <a href="javascript:;"><img src="demo3.jpg"/></a>
-    <a href="javascript:;"><img src="demo4.jpg"/></a>
-    <a href="javascript:;"><img src="demo5.jpg"/></a>
-    <a href="javascript:;"><img src="demo6.jpg"/></a>
+<div id="slide" style="height:330px;">
+    <ul>
+        <li data-text="这是文本"><a href="javascript:;"><img src="demo1.jpg"/></a></li>
+        <li><a href="javascript:;"><img src="demo2.jpg"/></a></li>
+        <li><a href="javascript:;"><img src="demo3.jpg"/></a></li>
+        <li><a href="javascript:;"><img src="demo4.jpg"/></a></li>
+        <li><a href="javascript:;"><img src="demo5.jpg"/></a></li>
+        <li><a href="javascript:;"><img src="demo6.jpg"/></a></li>
+    </ul>
 </div>
 <div class="">
     <h3>选项</h3>
@@ -54,6 +61,7 @@
             </select>
         </li>
     </ul>
+    <!--
     <h3>过场效果</h3>
     <ul id="effects">
         <li>
@@ -143,14 +151,24 @@
             <label for="effects-fumes">烟幕[fumes]</label>
         </li>
     </ul>
+    -->
 </div>
 <script type="text/javascript">
     $(function () {
 
         /* 创建轮播效果 */
-        $('#slider').vmcSlider({
-            effects: [],
+        $('#slide').vmcSlide({
             duration: 1000
+            , speed: 800
+            , effects: ['fade', 'slideX', 'slideY', 'page', 'page2', 'rollingX', 'rollingY', 'blindsX', 'blindsY']
+            // , showText: true
+            // , random: false
+            // ,sideButton:false
+            // ,navButton:false
+            , flip: function (from, to) {
+                console.log('from:' + from + ' to:' + to);
+
+            }
         });
 
         /* 获取效果列表 */
@@ -163,20 +181,20 @@
         };
 
         $('#effects').on('click', 'input[name="effects"]', function () {
-            $('#slider').vmcSlider('option', 'effects', getEffects());
+            $('#slide').vmcSlide('option', 'effects', getEffects());
         });
 
-        $('#slider').vmcSlider('option', 'effects', getEffects());
+        // $('#slide').vmcSlide('option', 'effects', getEffects());
 
         /* 全选/全不选 */
         $('#selectall').on('click', function () {
             $('input[name="effects"]').prop('checked', $(this).prop('checked'));
-            $('#slider').vmcSlider('option', 'effects', getEffects());
+            $('#slide').vmcSlide('option', 'effects', getEffects());
         });
 
 
         /* 翻页事件 */
-        $('#slider').on('vmcsliderflip', function (e, ui) {
+        $('#slide').on('vmcslideflip', function (e, ui) {
             $('#effects').find('li').removeClass('active');
             var name = ui.options.effects[ui.effectIndex];
             $('#effects-' + name).closest('li').addClass('active');
@@ -184,32 +202,32 @@
 
         /* 自动播放 */
         $('#autoPlay').on('click', function () {
-            $('#slider').vmcSlider('option', 'autoPlay', $(this).prop('checked'));
+            $('#slide').vmcSlide('option', 'autoPlay', $(this).prop('checked'));
         });
 
         /* 随机效果 */
         $('#random').on('click', function () {
-            $('#slider').vmcSlider('option', 'random', $(this).prop('checked'));
+            $('#slide').vmcSlide('option', 'random', $(this).prop('checked'));
         });
 
 
         /* 显示侧边翻页按钮 */
         $('#sideButton').on('click', function () {
-            $('#slider').vmcSlider('option', 'sideButton', $(this).prop('checked'));
+            $('#slide').vmcSlide('option', 'sideButton', $(this).prop('checked'));
         });
 
         /* 显示圆点导航按钮 */
         $('#navButton').on('click', function () {
-            $('#slider').vmcSlider('option', 'navButton', $(this).prop('checked'));
+            $('#slide').vmcSlide('option', 'navButton', $(this).prop('checked'));
         });
 
         /* 升序播放 */
         $('#ascending').on('click', function () {
-            $('#slider').vmcSlider('option', 'ascending', $(this).prop('checked'));
+            $('#slide').vmcSlide('option', 'ascending', $(this).prop('checked'));
         });
 
         $('#duration').on('change', function () {
-            $('#slider').vmcSlider('option', 'duration', $(this).val());
+            $('#slide').vmcSlide('option', 'duration', $(this).val());
         });
 
     });

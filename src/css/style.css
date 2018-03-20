@@ -1,113 +1,162 @@
-/**
- * VmcSlider 图片轮播插件 v1.1.0
- * 维米客网页工作室 Vomoc Web Studio
- * http://www.vomoc.com/vmc/slider/
- * vomoc@qq.com
- * 2015/11/14
- **/
-
-.vui-slider {
+.vui-slide-mimic {
+    overflow: hidden;
     position: relative;
-    overflow: hidden;
-    background: #999;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
-.vui-slider .vui-items {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-}
-.vui-slider .vui-item {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.vui-slider .vui-item a, .vui-slider .vui-item img {
+
+/************************************************/
+
+.vui-slide-scene {
     display: block;
     padding: 0;
     margin: 0;
-    border: none;
+    width: 100%;
+    height: 100%;
 }
-.vui-slider .vui-buttons {
-    position: absolute;
-    z-index: 5;
-    bottom: 16px;
-    left: 50%;
-    float: left;
-    display: inline;
-    filter: alpha(Opacity=80);
-    -moz-opacity: 0.8;
-    opacity: 0.8;
+
+.vui-slide-scene > img {
+    height: 100%;
+    width: 100%;
 }
-.vui-slider .vui-button {
-    float: left;
-    display: inline;
+
+/************************************************/
+
+.vui-slide-transfer {
     overflow: hidden;
-    height: 12px;
-    width: 12px;
-    margin: 0 10px;
-    padding: 0;
-    border: none;
-    border-radius: 6px;
-    background: #FFF;
-    cursor: pointer;
-}
-.vui-slider .vui-button-cur {
-    background-color: #C00;
-}
-.vui-slider .vui-transfer {
-    display: none;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 3;
+    z-index: 50;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /*background-color: #000000;*/
+
 }
-.vui-slider .vui-prev {
+
+/************************************************/
+
+.vui-slide-grid {
+    position: absolute;
+    /*background-color: #ccc;*/
+    overflow: hidden;
+    background-repeat: no-repeat;
+
+}
+
+.vui-slide-grid img {
+    width: 100%;
+    height: 100%;
+}
+
+/************************************************/
+
+/************************************************/
+
+.vui-slide-handle-buttons {
+    position: absolute;
+    z-index: 99;
+    bottom: 3%;
+    left: 0;
+    width: 100%;
+    font-size: 0;
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vui-slide-handle-button {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.vui-slide-handle-buttons .active {
+    background: #CC0000;
+}
+
+/************************************************/
+.vui-slide-side-buttons {
+    z-index: 80;
     position: absolute;
     top: 50%;
     left: 0;
-    z-index: 5;
-    width: 60px;
-    height: 150px;
-    margin-top: -75px;
-    border-radius: 0 10px 10px 0;
-    background: url(prev.gif) no-repeat;
-    cursor: pointer;
-    filter: alpha(opacity=30);
-    -moz-opacity: 0.3;
-    -khtml-opacity: 0.3;
-    opacity: 0.3;
-    transition: 0.5s ease;
-    -o-transition: 0.5s ease;
-    -webkit-transition: 0.5s ease;
+    height: 0;
+    width: 100%;
 }
-.vui-slider .vui-next {
+
+.vui-slide-side-button {
     position: absolute;
-    top: 50%;
-    right: 0;
-    z-index: 5;
+    height: 120px;
     width: 60px;
-    height: 150px;
-    margin-top: -75px;
-    border-radius: 10px 0 0 10px;
-    background: url(next.gif) no-repeat;
+    background: transparent no-repeat center center;
+    background-size: contain;
     cursor: pointer;
-    filter: alpha(opacity=30);
-    -moz-opacity: 0.3;
-    -khtml-opacity: 0.3;
-    opacity: 0.3;
-    transition: 0.5s ease;
-    -o-transition: 0.5s ease;
-    -webkit-transition: 0.5s ease;
 }
-.vui-slider .vui-sidebutton-hover {
-    filter: alpha(opacity=40);
-    -moz-opacity: 0.4;
-    -khtml-opacity: 0.4;
-    opacity: 0.4;
+
+.vui-slide-side-buttons .next {
+    top: -60px;
+    right: 0;
+    border-radius: 20px 0 0 20px;
+    background-image: url("next.gif");
+}
+
+.vui-slide-side-buttons .prev {
+    top: -60px;
+    left: 0;
+    border-radius: 0 20px 20px 0;
+    background-image: url("prev.gif");
+}
+
+.vui-slide-side-buttons .hover {
     background-color: #000;
+    filter: alpha(Opacity=40);
+    -moz-opacity: 0.4;
+    opacity: 0.4;
+}
+
+/************************************************/
+
+.vui-slide-mask {
+    z-index: 50;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: #000;
+    filter: alpha(Opacity=30);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
+}
+
+.vui-slide-text {
+    z-index: 60;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    overflow: hidden;
+}
+
+.vui-slide-text .text {
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.vui-slide-text a {
+    color: #ffffff;
+    text-decoration: none;
 }
