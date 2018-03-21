@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../src/css/style.css">
-
+    <title>demo - vmc.slide v2.0.0</title>
     <script type="text/javascript" src="../lib/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" href="../src/css/style.css">
     <script src="../src/vmc.slide.js"></script>
     <script src="../src/vmc.slide.effects.js"></script>
     <script type="text/javascript">
@@ -15,18 +14,15 @@
                 , imgHeight: 330
                 , duration: 1000
                 , speed: 800
-                , effects: ['fade', 'slideX', 'slideY', 'page', 'page2', 'rollingX', 'rollingY', 'blindsX', 'blindsY']
-                , showText: true
+                , effects: ['fade', 'slideX', 'slideY', 'page', 'circle', 'rollingX', 'rollingY', 'blindsX', 'blindsY']
+                // , showText: true
                 , random: false
-                // ,sideButton:false
-                // ,navButton:false
+                // ,sideButton: false
+                // ,navButton: false
                 , flip: function (from, to) {
                     console.log('from:' + from + ' to:' + to);
-
                 }
             });
-
-
         });
     </script>
 </head>
@@ -34,15 +30,14 @@
 
 <div id="slide" style="height:330px;">
     <ul>
-        <li data-text="这是文本"><a href="javascript:;"><img src="demo1.jpg"/></a></li>
-        <li><a href="javascript:;"><img src="demo2.jpg"/></a></li>
-        <li><a href="javascript:;"><img src="demo3.jpg"/></a></li>
-        <li><a href="javascript:;"><img src="demo4.jpg"/></a></li>
-        <li><a href="javascript:;"><img src="demo5.jpg"/></a></li>
-        <li><a href="javascript:;"><img src="demo6.jpg"/></a></li>
+        <li data-text="这是文本"><a href="#"><img src="demo1.jpg"/></a></li>
+        <li><a href="#"><img src="demo2.jpg"/></a></li>
+        <li><a href="#"><img src="demo3.jpg"/></a></li>
+        <li><a href="#"><img src="demo4.jpg"/></a></li>
+        <li><a href="#"><img src="demo5.jpg"/></a></li>
+        <li><a href="#"><img src="demo6.jpg"/></a></li>
     </ul>
 </div>
-
 
 </body>
 </html>

@@ -1,3 +1,10 @@
+/**
+ * vmc.slide 图片轮播JQuery插件 v2.0.0
+ * 维米客网页工作室 vomoc.com
+ * https://github.com/vomoc/vmc.slide
+ * vomoc@qq.com
+ * 2017/03/20
+ **/
 ;(function ($, undefined) {
     $.vmcSlideEffects({
         // 横向滑动
@@ -98,7 +105,8 @@
             }
 
         },
-        'page2': function (index) {
+        // 圆圈
+        'circle': function (index) {
             var the = this,
                 opts = the.options;
 

@@ -1,9 +1,9 @@
 /**
- * VmcSlide 图片轮播插件 v2.0.0
- * 维米客网页工作室 Vomoc Web Studio
- * http://www.vomoc.com/vmc/slide/
+ * vmc.slide 图片轮播JQuery插件 v2.0.0
+ * 维米客网页工作室 vomoc.com
+ * https://github.com/vomoc/vmc.slide
  * vomoc@qq.com
- * 2017/03/17
+ * 2017/03/20
  **/
 ;(function ($, undefined) {
     var dataKey = 'vomoc';
