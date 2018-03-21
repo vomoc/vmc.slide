@@ -1,5 +1,10 @@
 # vmc.slide 图片轮播JQuery插件
 
+### 演示
+
+[demo](http://vomoc.github.io/vmc.slide/test/demo.html)
+
+
 ### 更新说明
 
 v2.0.0 - 2018.3.20
