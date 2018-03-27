@@ -72,6 +72,8 @@
 
 .vui-slide-handle-buttons .vui-slide-handle-button {
     display: inline-block;
+    *zoom: 1;
+    *display: inline;
     height: 12px;
     width: 12px;
     border-radius: 50%;
